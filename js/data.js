@@ -14,7 +14,12 @@ window.COURSE = {
         { id: 'c1-l1-w2', es: 'vivir', fr: 'vivre, habiter', exEs: 'Vivimos en Francia.', exFr: 'Nous vivons en France.' },
         { id: 'c1-l1-w3', es: 'leer', fr: 'lire', exEs: 'Lees mucho.', exFr: 'Tu lis beaucoup.' },
         { id: 'c1-l1-w4', es: 'la noticia', fr: 'la nouvelle, l\'information', exEs: 'Es una noticia importante.', exFr: 'C\'est une nouvelle importante.' },
-        { id: 'c1-l1-w5', es: 'el periódico', fr: 'le journal (la presse)', exEs: 'Leo el periódico en casa.', exFr: 'Je lis le journal à la maison.' }
+        { id: 'c1-l1-w5', es: 'el periódico', fr: 'le journal (la presse)', exEs: 'Leo el periódico en casa.', exFr: 'Je lis le journal à la maison.' },
+        { id: 'c1-l1-w6', es: 'hablar', fr: 'parler', exEs: 'Hablo un poco de español.', exFr: 'Je parle un peu espagnol.' },
+        { id: 'c1-l1-w7', es: 'comer', fr: 'manger', exEs: 'Comemos en casa.', exFr: 'Nous mangeons à la maison.' },
+        { id: 'c1-l1-w8', es: 'escuchar', fr: 'écouter', exEs: 'Escucho la radio.', exFr: 'J\'écoute la radio.' },
+        { id: 'c1-l1-w9', es: 'la casa', fr: 'la maison', exEs: 'Estoy en casa.', exFr: 'Je suis à la maison.' },
+        { id: 'c1-l1-w10', es: 'el día', fr: 'le jour, la journée', exEs: 'Es un día importante.', exFr: 'C\'est un jour important.' }
       ],
       expressions: [
         { id: 'c1-l1-e1', es: 'siempre', fr: 'toujours', exEs: 'Siempre leo las noticias.', exFr: 'Je lis toujours les nouvelles.' },
@@ -90,7 +95,12 @@ window.COURSE = {
         { id: 'c1-l2-w2', es: 'la noche', fr: 'le soir, la nuit', exEs: 'Leo por la noche.', exFr: 'Je lis le soir.' },
         { id: 'c1-l2-w3', es: 'temprano', fr: 'tôt', exEs: 'Me levanto temprano.', exFr: 'Je me lève tôt.' },
         { id: 'c1-l2-w4', es: 'la semana', fr: 'la semaine', exEs: 'Esta semana tengo mucho trabajo.', exFr: 'Cette semaine j\'ai beaucoup de travail.' },
-        { id: 'c1-l2-w5', es: 'la hora', fr: 'l\'heure', exEs: '¿Qué hora es?', exFr: 'Quelle heure est-il ?' }
+        { id: 'c1-l2-w5', es: 'la hora', fr: 'l\'heure', exEs: '¿Qué hora es?', exFr: 'Quelle heure est-il ?' },
+        { id: 'c1-l2-w6', es: 'levantarse', fr: 'se lever', exEs: 'Me levanto a las siete.', exFr: 'Je me lève à sept heures.' },
+        { id: 'c1-l2-w7', es: 'el trabajo', fr: 'le travail', exEs: 'Voy al trabajo en metro.', exFr: 'Je vais au travail en métro.' },
+        { id: 'c1-l2-w8', es: 'el tiempo', fr: 'le temps (qui passe)', exEs: 'No tengo tiempo.', exFr: 'Je n\'ai pas le temps.' },
+        { id: 'c1-l2-w9', es: 'la tarde', fr: 'l\'après-midi', exEs: 'Por la tarde voy al gimnasio.', exFr: 'L\'après-midi, je vais à la salle de sport.' },
+        { id: 'c1-l2-w10', es: 'el año', fr: 'l\'an, l\'année', exEs: 'Tengo treinta años.', exFr: 'J\'ai trente ans.' }
       ],
       expressions: [
         { id: 'c1-l2-e1', es: 'una vez', fr: 'une fois', exEs: 'Voy a Madrid una vez a la semana.', exFr: 'Je vais à Madrid une fois par semaine.' },

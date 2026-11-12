@@ -377,14 +377,20 @@
       });
     });
 
-    add('Vocabulaire', function (box, next) {
-      L.words.forEach(function (w) { introduce(w.id); });
-      box.appendChild(el('div', { class: 'stack' }, [
-        el('div', { class: 'eyebrow', text: 'Les 5 mots de la leçon' }),
-        el('p', { class: 'muted', text: 'Écoutez chaque mot et répétez-le à voix haute.' })
-      ]));
-      box.appendChild(el('div', { class: 'card' }, [vocabList(L.words)]));
-      box.appendChild(continueBtn('Continuer', next));
+    // Les mots sont présentés par groupes de 5 pour ne pas noyer l'écran.
+    var groups = Math.ceil(L.words.length / 5);
+    L.words.forEach(function (w, i) {
+      if (i % 5) return;
+      var chunk = L.words.slice(i, i + 5), g = i / 5 + 1;
+      add('Vocabulaire', function (box, next) {
+        chunk.forEach(function (w2) { introduce(w2.id); });
+        box.appendChild(el('div', { class: 'stack' }, [
+          el('div', { class: 'eyebrow', text: 'Les ' + L.words.length + ' mots de la leçon' + (groups > 1 ? ' · ' + g + ' sur ' + groups : '') }),
+          el('p', { class: 'muted', text: 'Écoutez chaque mot et répétez-le à voix haute.' })
+        ]));
+        box.appendChild(el('div', { class: 'card' }, [vocabList(chunk)]));
+        box.appendChild(continueBtn('Continuer', next));
+      });
     });
 
     add('Expressions', function (box, next) {
