@@ -412,6 +412,7 @@
       var go = el('button', { class: 'wide', type: 'button', disabled: true, onclick: next }, ['Continuer']);
       box.appendChild(el('div', { class: 'spread' }, [el('h2', { class: 'es', lang: 'es', text: R.title }), listenBtn(R.text, 'Écouter le texte')]));
       box.appendChild(el('div', { class: 'card reading es', lang: 'es', text: R.text }));
+      if (R.source) box.appendChild(el('p', { class: 'muted', style: 'font-size:.85rem', text: 'Chiffres réels. Sources : ' + R.source }));
       box.appendChild(el('details', null, [
         el('summary', { text: 'Aide au vocabulaire' }),
         el('div', { class: 'chips', style: 'margin-top:8px' }, R.help.map(function (p) {
