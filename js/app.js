@@ -505,7 +505,7 @@
       el('div', { class: 'card stack' }, [
         el('div', { class: 'eyebrow', text: 'La suite' }),
         el('p', { text: 'Demain : une révision de 3 minutes des mots et phrases d\'aujourd\'hui.' }),
-        el('p', { text: nextL && !nextL.soon ? 'Après-demain : leçon ' + (index + 2) + ', « ' + nextL.title + ' ».' : 'La leçon suivante arrive bientôt.' })
+        el('p', { text: nextL && !nextL.soon ? 'Après-demain : leçon ' + (index + 2) + ', « ' + nextL.title + ' ».' : (nextL ? 'La leçon suivante arrive bientôt.' : 'Vous avez terminé le cycle 1. Continuez les révisions du jour : ce sont elles qui fixent ce que vous avez appris.') })
       ]),
       el('button', { class: 'wide', type: 'button', onclick: home }, ['Retour à l\'accueil'])
     ]);
@@ -542,6 +542,40 @@
     render();
   }
 
+  // ---------- Fiches à relire : vocabulaire et grammaire d'une leçon ----------
+  function fiche(index, tab) {
+    if (synth) synth.cancel();
+    var L = COURSE.lessons[index];
+    function tabBtn(key, label) {
+      return el('button', { class: tab === key ? 'small' : 'ghost small', type: 'button', 'aria-pressed': tab === key ? 'true' : 'false', onclick: function () { fiche(index, key); } }, [label]);
+    }
+    var content;
+    if (tab === 'gram') {
+      content = [el('h2', { text: L.grammarTitle }), el('div', { class: 'card', html: L.grammar })];
+    } else {
+      content = [
+        el('div', { class: 'eyebrow', text: 'Les ' + L.words.length + ' mots de la leçon' }),
+        el('div', { class: 'card' }, [vocabList(L.words)]),
+        el('div', { class: 'eyebrow', text: 'Expressions et adverbes' }),
+        el('div', { class: 'card' }, [vocabList(L.expressions)]),
+        el('div', { class: 'eyebrow', text: 'Mots transparents' }),
+        el('div', { class: 'chips' }, L.passive.map(function (p) {
+          return el('span', { class: 'chip' }, [el('b', { class: 'es', lang: 'es', text: p[0] }), ' · ' + p[1]]);
+        }))
+      ];
+    }
+    show([
+      el('div', { class: 'topbar' }, [el('button', { class: 'quiet small', type: 'button', onclick: home }, ['‹ Accueil'])]),
+      el('div', { class: 'stack', style: 'gap:2px' }, [el('div', { class: 'eyebrow', text: 'Leçon ' + (index + 1) }), el('h1', { text: L.title })]),
+      el('div', { class: 'row' }, [tabBtn('vocab', 'Vocabulaire'), tabBtn('gram', 'Grammaire')])
+    ].concat(content).concat([
+      el('div', { class: 'row' }, [
+        index > 0 ? el('button', { class: 'ghost small', type: 'button', onclick: function () { fiche(index - 1, tab); } }, ['‹ Leçon ' + index]) : null,
+        index < COURSE.lessons.length - 1 && !COURSE.lessons[index + 1].soon ? el('button', { class: 'ghost small', type: 'button', onclick: function () { fiche(index + 1, tab); } }, ['Leçon ' + (index + 2) + ' ›']) : null
+      ])
+    ]));
+  }
+
   // ---------- Accueil ----------
   function home() {
     if (synth) synth.cancel();
@@ -571,7 +605,7 @@
         [(inProgress ? 'Reprendre la leçon ' : 'Commencer la leçon ') + (nextIndex + 1)]));
     } else if (!due) {
       todayCard.appendChild(el('h2', { text: 'Tout est à jour' }));
-      todayCard.appendChild(el('p', { class: 'muted', text: 'Les prochaines leçons arrivent bientôt. Revenez demain pour la révision.' }));
+      todayCard.appendChild(el('p', { class: 'muted', text: 'Vous avez terminé toutes les leçons disponibles. Revenez demain pour la révision.' }));
     }
 
     var solid = 0, seen = 0;
@@ -588,7 +622,14 @@
           var ls = state.lessons[L.id], isDone = ls && ls.done;
           return el('li', { class: L.soon ? 'soon' : (isDone ? 'done' : '') }, [
             el('span', { class: 'num', text: String(idx + 1) }),
-            el('div', { class: 'body' }, [el('div', { class: 't', text: L.title }), el('div', { class: 'g', text: L.grammarTitle + (L.soon ? ' · bientôt' : isDone ? ' · terminée' : '') })]),
+            el('div', { class: 'body' }, [
+              el('div', { class: 't', text: L.title }),
+              el('div', { class: 'g', text: L.grammarTitle + (L.soon ? ' · bientôt' : isDone ? ' · terminée' : '') }),
+              L.soon ? null : el('div', { class: 'refs' }, [
+                el('button', { class: 'link', type: 'button', onclick: function () { fiche(idx, 'vocab'); } }, ['Vocabulaire']),
+                el('button', { class: 'link', type: 'button', onclick: function () { fiche(idx, 'gram'); } }, ['Grammaire'])
+              ])
+            ]),
             L.soon ? null : el('button', { class: 'ghost small', type: 'button', onclick: function () { startLesson(idx); } }, [ls && ls.pos != null ? 'Reprendre' : isDone ? 'Refaire' : 'Ouvrir'])
           ]);
         }))
