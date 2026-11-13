@@ -16,39 +16,39 @@ window.COURSE = {
         { id: 'c1-l1-w4', es: 'la noticia', fr: 'la nouvelle, l\'information', exEs: 'Es una noticia importante.', exFr: 'C\'est une nouvelle importante.' },
         { id: 'c1-l1-w5', es: 'el periódico', fr: 'le journal (la presse)', exEs: 'Leo el periódico en casa.', exFr: 'Je lis le journal à la maison.' },
         { id: 'c1-l1-w6', es: 'hablar', fr: 'parler', exEs: 'Hablo un poco de español.', exFr: 'Je parle un peu espagnol.' },
-        { id: 'c1-l1-w7', es: 'comer', fr: 'manger', exEs: 'Comemos en casa.', exFr: 'Nous mangeons à la maison.' },
+        { id: 'c1-l1-w7', es: 'comer', fr: 'manger, déjeuner', exEs: 'Comemos en casa.', exFr: 'Nous mangeons à la maison.' },
         { id: 'c1-l1-w8', es: 'escuchar', fr: 'écouter', exEs: 'Escucho la radio.', exFr: 'J\'écoute la radio.' },
         { id: 'c1-l1-w9', es: 'la casa', fr: 'la maison', exEs: 'Estoy en casa.', exFr: 'Je suis à la maison.' },
         { id: 'c1-l1-w10', es: 'el día', fr: 'le jour, la journée', exEs: 'Es un día importante.', exFr: 'C\'est un jour important.' }
       ],
       expressions: [
         { id: 'c1-l1-e1', es: 'siempre', fr: 'toujours', exEs: 'Siempre leo las noticias.', exFr: 'Je lis toujours les nouvelles.' },
-        { id: 'c1-l1-e2', es: 'nunca', fr: 'jamais', exEs: 'Nunca trabajo el domingo.', exFr: 'Je ne travaille jamais le dimanche.' },
+        { id: 'c1-l1-e2', es: 'nunca', fr: 'jamais', exEs: 'Nunca trabajo los domingos.', exFr: 'Je ne travaille jamais le dimanche.' },
         { id: 'c1-l1-e3', es: 'a veces', fr: 'parfois', exEs: 'A veces como en casa.', exFr: 'Parfois je mange à la maison.' }
       ],
       passive: [
         ['la familia', 'la famille'], ['la radio', 'la radio'], ['la televisión', 'la télévision'],
         ['el teléfono', 'le téléphone'], ['la información', 'l\'information'], ['importante', 'important'],
         ['nacional', 'national'], ['internacional', 'international'], ['la política', 'la politique'],
-        ['la economía', 'l\'économie'], ['la oficina', 'le bureau'], ['el país', 'le pays']
+        ['la economía', 'l\'économie'], ['la oficina', 'le bureau']
       ],
       reading: {
         title: 'Lucía, periodista',
-        text: 'Lucía es periodista. Es española y vive en Madrid, pero su familia está en Sevilla. Trabaja en un periódico nacional. Por la mañana, siempre lee las noticias en el teléfono y escucha la radio. A veces come en la oficina con sus compañeros. Nunca trabaja el domingo: ese día está en casa y habla por teléfono con su madre. Para Lucía, la información es muy importante.',
+        text: 'Lucía es periodista. Es española y vive en Madrid, pero su familia está en Sevilla. Trabaja en un periódico nacional. Por la mañana, siempre lee las noticias en el teléfono y escucha la radio. A veces come en la oficina con sus compañeros. Nunca trabaja los domingos: ese día está en casa y habla por teléfono con su madre. Para Lucía, la información es muy importante.',
         help: [
           ['periodista', 'journaliste'], ['pero', 'mais'], ['por la mañana', 'le matin'], ['escucha', 'elle écoute'],
-          ['come', 'elle mange'], ['sus compañeros', 'ses collègues'], ['el domingo', 'le dimanche'],
+          ['come', 'elle mange'], ['sus compañeros', 'ses collègues'], ['los domingos', 'le dimanche (tous les dimanches)'], ['con', 'avec'], ['para', 'pour'],
           ['ese día', 'ce jour-là'], ['su madre', 'sa mère'], ['muy', 'très']
         ],
         questions: [
           { q: 'Où vit Lucía ?', choices: ['À Séville', 'À Madrid', 'À Barcelone'], answer: 1, why: '« Vive en Madrid ». C\'est sa famille qui est à Séville.' },
           { q: 'Que fait-elle toujours le matin ?', choices: ['Elle lit les nouvelles', 'Elle mange au bureau', 'Elle téléphone à sa mère'], answer: 0, why: '« Por la mañana, siempre lee las noticias ».' },
-          { q: 'Quel jour ne travaille-t-elle jamais ?', choices: ['Le lundi', 'Le samedi', 'Le dimanche'], answer: 2, why: '« Nunca trabaja el domingo ».' }
+          { q: 'Quel jour ne travaille-t-elle jamais ?', choices: ['Le lundi', 'Le samedi', 'Le dimanche'], answer: 2, why: '« Nunca trabaja los domingos ».' }
         ]
       },
       grammar: [
         '<h3>On ne dit pas le sujet</h3>',
-        '<p>En espagnol, la terminaison du verbe suffit : <b>Trabajo</b> = je travaille. On ajoute <i>yo, tú, ella…</i> seulement pour insister.</p>',
+        '<p>En espagnol, la terminaison du verbe suffit : <b>Trabajo</b> = je travaille. On ajoute <i>yo, tú, ella…</i> seulement pour insister.</p><p>Pour vouvoyer : <b>usted</b> (une personne) et <b>ustedes</b> (plusieurs), avec les formes de <i>él</i> et de <i>ellos</i>.</p>',
         '<h3>Le présent des verbes réguliers</h3>',
         '<div class="tablewrap"><table><thead><tr><th></th><th>hablar<br><small>parler</small></th><th>comer<br><small>manger</small></th><th>vivir<br><small>vivre</small></th></tr></thead><tbody>',
         '<tr><td>yo</td><td>habl<b>o</b></td><td>com<b>o</b></td><td>viv<b>o</b></td></tr>',
@@ -66,22 +66,22 @@ window.COURSE = {
         '</tbody></table></div>',
         '<p><b>Ser</b> pour l\'identité, la nationalité, le métier : <i>Lucía <b>es</b> periodista.</i><br><b>Estar</b> pour le lieu et l\'état du moment : <i>Lucía <b>está</b> en Madrid.</i></p>',
         '<h3>Le piège du jour</h3>',
-        '<p><b>Nunca</b> placé avant le verbe remplace « ne… jamais » à lui seul : <i><b>Nunca</b> trabajo el domingo.</i> Pas de <i>no</i>.</p>'
+        '<p><b>Nunca</b> placé avant le verbe remplace « ne… jamais » à lui seul : <i><b>Nunca</b> trabajo los domingos.</i> Pas de <i>no</i>. Placé après le verbe, il en faut un : <i><b>No</b> trabajo <b>nunca</b>.</i></p>'
       ].join(''),
       listening: [
         { id: 'c1-l1-o1', es: 'Vivo en Francia y trabajo en una oficina.', fr: ['Je vis en France et je travaille dans un bureau.', 'J\'habite en France et je travaille dans un bureau.'] },
-        { id: 'c1-l1-o2', es: 'Lucía siempre lee las noticias por la mañana.', fr: ['Lucía lit toujours les nouvelles le matin.', 'Lucía lit toujours les informations le matin.', 'Lucía lit toujours les infos le matin.', 'Lucía lit toujours les actualités le matin.', 'Le matin, Lucía lit toujours les nouvelles.'] },
+        { id: 'c1-l1-o2', es: 'Lucía siempre lee las noticias por la mañana.', fr: ['Lucía lit toujours les nouvelles le matin.', 'Lucía lit toujours les informations le matin.', 'Lucía lit toujours les infos le matin.', 'Lucía lit toujours les actualités le matin.', 'Le matin, Lucía lit toujours les nouvelles.', 'Le matin, Lucía lit toujours les informations.', 'Le matin, Lucía lit toujours les infos.', 'Le matin, Lucía lit toujours les actualités.'] },
         { id: 'c1-l1-o3', es: 'A veces comemos en casa.', fr: ['Parfois nous mangeons à la maison.', 'Parfois on mange à la maison.', 'Nous mangeons parfois à la maison.', 'On mange parfois à la maison.', 'Quelquefois nous mangeons à la maison.', 'Parfois nous mangeons chez nous.'] }
       ],
       writing: [
-        { id: 'c1-l1-x1', fr: 'Je travaille à Paris.', es: ['Trabajo en París.', 'Yo trabajo en París.'], hint: '« À » + ville se dit « en ».' },
+        { id: 'c1-l1-x1', fr: 'Je travaille à Paris.', es: ['Trabajo en París.', 'Yo trabajo en París.'], hint: 'Pour dire où l\'on est ou où l\'on travaille : « en » (en París).' },
         { id: 'c1-l1-x2', fr: 'Nous lisons le journal.', es: ['Leemos el periódico.', 'Nosotros leemos el periódico.', 'Nosotras leemos el periódico.'] },
-        { id: 'c1-l1-x3', fr: 'Je suis français et je vis en France.', es: ['Soy francés y vivo en Francia.', 'Soy francesa y vivo en Francia.', 'Yo soy francés y vivo en Francia.', 'Yo soy francesa y vivo en Francia.'], hint: 'Au féminin : « francesa ».' },
+        { id: 'c1-l1-x3', fr: 'Je suis français et je vis en France.', es: ['Soy francés y vivo en Francia.', 'Soy francesa y vivo en Francia.', 'Yo soy francés y vivo en Francia.', 'Yo soy francesa y vivo en Francia.'], hint: 'Français = francés ; française = francesa.' },
         { id: 'c1-l1-x4', fr: 'Parfois, je lis les nouvelles.', es: ['A veces leo las noticias.', 'Leo las noticias a veces.', 'A veces yo leo las noticias.', 'Yo leo las noticias a veces.', 'Yo a veces leo las noticias.'] }
       ],
       speaking: [
         { id: 'c1-l1-p1', fr: 'Je vis en France.', es: ['Vivo en Francia.', 'Yo vivo en Francia.'] },
-        { id: 'c1-l1-p2', fr: 'Je ne travaille jamais le dimanche.', es: ['Nunca trabajo el domingo.', 'No trabajo nunca el domingo.', 'Nunca trabajo los domingos.', 'No trabajo nunca los domingos.', 'Yo nunca trabajo el domingo.'] },
+        { id: 'c1-l1-p2', fr: 'Je ne travaille jamais le dimanche.', es: ['Nunca trabajo los domingos.', 'Nunca trabajo el domingo.', 'No trabajo nunca los domingos.', 'No trabajo nunca el domingo.', 'Yo nunca trabajo los domingos.', 'Yo nunca trabajo el domingo.', 'Yo no trabajo nunca los domingos.', 'Yo no trabajo nunca el domingo.'] },
         { id: 'c1-l1-p3', fr: 'Le journal est important.', es: ['El periódico es importante.'] }
       ]
     },
@@ -110,21 +110,21 @@ window.COURSE = {
       passive: [
         ['la rutina', 'la routine'], ['el minuto', 'la minute'], ['el momento', 'le moment'],
         ['el metro', 'le métro'], ['el autobús', 'l\'autobus'], ['el tren', 'le train'],
-        ['la universidad', 'l\'université'], ['el restaurante', 'le restaurant'], ['normalmente', 'normalement'],
+        ['la universidad', 'l\'université'], ['el restaurante', 'le restaurant'], ['normalmente', 'd\'habitude'],
         ['el programa', 'le programme'], ['el gimnasio', 'la salle de sport'], ['la reunión', 'la réunion']
       ],
       reading: {
         title: 'Un día de Pablo',
-        text: 'Pablo tiene treinta años y vive en Valencia. Todos los días se levanta temprano, a las siete de la mañana. Hace café y va al trabajo en metro. Tiene una reunión una vez a la semana, el lunes. Por la tarde, a veces va al gimnasio. Por la noche hace la cena y escucha las noticias en la radio. A las once ya está en la cama. Durante la semana, nunca tiene tiempo para leer el periódico.',
+        text: 'Pablo tiene treinta años y vive en Valencia. Todos los días se levanta temprano, a las siete de la mañana. Hace café y va al trabajo en metro. Tiene una reunión una vez a la semana, los lunes. Por la tarde, a veces va al gimnasio. Por la noche hace la cena y escucha las noticias en la radio. A las once ya está en la cama. Durante la semana, nunca tiene tiempo para leer el periódico.',
         help: [
           ['treinta años', 'trente ans'], ['se levanta', 'il se lève'], ['a las siete', 'à sept heures'],
-          ['el lunes', 'le lundi'], ['por la tarde', 'l\'après-midi'], ['la cena', 'le dîner'],
+          ['los lunes', 'le lundi (tous les lundis)'], ['por la tarde', 'l\'après-midi'], ['la cena', 'le dîner'],
           ['a las once', 'à onze heures'], ['la cama', 'le lit'], ['durante', 'pendant'], ['tiempo para', 'le temps de']
         ],
         questions: [
           { q: 'À quelle heure Pablo se lève-t-il ?', choices: ['À six heures', 'À sept heures', 'À onze heures'], answer: 1, why: '« Se levanta temprano, a las siete de la mañana ».' },
           { q: 'Comment va-t-il au travail ?', choices: ['En métro', 'En train', 'En bus'], answer: 0, why: '« Va al trabajo en metro ».' },
-          { q: 'À quelle fréquence a-t-il une réunion ?', choices: ['Tous les jours', 'Jamais', 'Une fois par semaine'], answer: 2, why: '« Una vez a la semana, el lunes ».' }
+          { q: 'À quelle fréquence a-t-il une réunion ?', choices: ['Tous les jours', 'Jamais', 'Une fois par semaine'], answer: 2, why: '« Una vez a la semana, los lunes ».' }
         ]
       },
       grammar: [
@@ -139,7 +139,7 @@ window.COURSE = {
         '</tbody></table></div>',
         '<p>Avec <b>ir</b>, on dit <b>a</b> + lieu : <i>Voy <b>a</b> Madrid.</i> Devant <i>el</i>, « a + el » devient <b>al</b> : <i>Voy <b>al</b> trabajo.</i></p>',
         '<h3>Les verbes pronominaux</h3>',
-        '<p>Comme en français, le pronom se place avant le verbe : <b>levantarse</b> = se lever.</p>',
+        '<p><b>Levantarse</b> = se lever. Comme en français, le pronom se place avant le verbe conjugué (<i>me levanto</i>) ; à l\'infinitif, il se colle à la fin (<i>levantarse</i>).</p>',
         '<div class="tablewrap"><table><tbody>',
         '<tr><td>yo</td><td><b>me</b> levanto</td><td>nosotros</td><td><b>nos</b> levantamos</td></tr>',
         '<tr><td>tú</td><td><b>te</b> levantas</td><td>vosotros</td><td><b>os</b> levantáis</td></tr>',
@@ -154,10 +154,10 @@ window.COURSE = {
         { id: 'c1-l2-o3', es: 'Pablo ya está en casa.', fr: ['Pablo est déjà à la maison.', 'Pablo est déjà chez lui.'] }
       ],
       writing: [
-        { id: 'c1-l2-x1', fr: 'Je vais au travail tous les jours.', es: ['Voy al trabajo todos los días.', 'Todos los días voy al trabajo.', 'Yo voy al trabajo todos los días.'] },
-        { id: 'c1-l2-x2', fr: 'Je me lève tôt le matin.', es: ['Me levanto temprano por la mañana.', 'Por la mañana me levanto temprano.', 'Yo me levanto temprano por la mañana.'], hint: '« Le matin » = por la mañana.' },
+        { id: 'c1-l2-x1', fr: 'Je vais au travail tous les jours.', es: ['Voy al trabajo todos los días.', 'Todos los días voy al trabajo.', 'Yo voy al trabajo todos los días.', 'Yo todos los días voy al trabajo.', 'Cada día voy al trabajo.', 'Voy al trabajo cada día.'] },
+        { id: 'c1-l2-x2', fr: 'Je me lève tôt le matin.', es: ['Me levanto temprano por la mañana.', 'Por la mañana me levanto temprano.', 'Yo me levanto temprano por la mañana.', 'Me levanto pronto por la mañana.', 'Por la mañana me levanto pronto.'], hint: '« Le matin » = por la mañana.' },
         { id: 'c1-l2-x3', fr: 'Elle a une réunion cette semaine.', es: ['Tiene una reunión esta semana.', 'Ella tiene una reunión esta semana.', 'Esta semana tiene una reunión.', 'Esta semana ella tiene una reunión.'], hint: '« Cette » = esta.' },
-        { id: 'c1-l2-x4', fr: 'Qu\'est-ce que tu fais ce soir ?', es: ['¿Qué haces esta noche?', '¿Qué haces tú esta noche?', '¿Tú qué haces esta noche?'], hint: '« Qu\'est-ce que » = qué.' }
+        { id: 'c1-l2-x4', fr: 'Qu\'est-ce que tu fais ce soir ?', es: ['¿Qué haces esta noche?', '¿Qué haces tú esta noche?', '¿Tú qué haces esta noche?'], hint: '« Qu\'est-ce que » = qué ; « ce soir » = esta noche.' }
       ],
       speaking: [
         { id: 'c1-l2-p1', fr: 'Je vais à Madrid une fois par semaine.', es: ['Voy a Madrid una vez a la semana.', 'Voy a Madrid una vez por semana.', 'Yo voy a Madrid una vez a la semana.'] },
@@ -171,7 +171,7 @@ window.COURSE = {
       grammarTitle: 'Les verbes à diphtongue, hay et está',
       canDo: "Je peux comprendre l'essentiel d'un titre de presse simple.",
       words: [
-        { id: 'c1-l3-w1', es: 'el gobierno', fr: "le gouvernement", exEs: 'El gobierno quiere un cambio.', exFr: "Le gouvernement veut un changement." },
+        { id: 'c1-l3-w1', es: 'el gobierno', fr: "le gouvernement", exEs: 'El Gobierno quiere un cambio.', exFr: "Le gouvernement veut un changement." },
         { id: 'c1-l3-w2', es: 'el país', fr: "le pays", exEs: 'España es un país de Europa.', exFr: "L'Espagne est un pays d'Europe." },
         { id: 'c1-l3-w3', es: 'la ciudad', fr: "la ville", exEs: 'Vivo en una ciudad grande.', exFr: "Je vis dans une grande ville." },
         { id: 'c1-l3-w4', es: 'el precio', fr: "le prix", exEs: 'Los precios suben.', exFr: "Les prix montent." },
@@ -194,17 +194,21 @@ window.COURSE = {
         ['europeo', "européen"], ['público', "public"], ['la decisión', "la décision"]
       ],
       reading: {
-        title: 'Los titulares de hoy',
-        text: 'Hay muchas noticias en el periódico. Según el gobierno, la situación económica del país es buena, pero la gente no piensa lo mismo: los precios suben y muchas familias no pueden pagar el alquiler en las grandes ciudades. La ministra de Economía quiere una solución rápida. El Parlamento empieza esta semana el debate sobre una nueva ley de vivienda. También hay elecciones en dos regiones. Todavía no hay acuerdo entre los partidos.',
+        title: 'La vivienda en los titulares',
+        source: "Idealista (prix des loyers, octobre 2026) ; décret sur les loyers validé par le Congrès (novembre 2026) ; prévisions de Solvia (novembre 2026).",
+        text: 'Hay muchas noticias sobre la vivienda en el periódico. Según el portal Idealista, el precio medio del alquiler en España es de 15,1 euros por metro cuadrado en octubre, un 5,6 % más que hace un año. Hay un nuevo decreto: el alquiler de un contrato de vivienda habitual solo puede subir un 2 % al año hasta finales de 2027. El Congreso aprueba el decreto. Según la empresa Solvia, los precios del alquiler todavía pueden subir entre un 5 % y un 8 % en un año.',
         help: [
-          ['los titulares', "les gros titres"], ['piensa', "pense"], ['lo mismo', "la même chose"], ['suben', "montent"],
-          ['pagar el alquiler', "payer le loyer"], ['rápida', "rapide"], ['el debate sobre', "le débat sur"],
-          ['la ley de vivienda', "la loi sur le logement"], ['acuerdo', "accord"], ['los partidos', "les partis"]
+          ['los titulares', "les titres (de la presse)"], ['sobre', "sur, au sujet de"], ['la vivienda', "le logement"],
+          ['el portal', "le site (portail immobilier)"], ['medio', "moyen"], ['el alquiler', "le loyer"],
+          ['por metro cuadrado', "par mètre carré"], ['más que hace un año', "de plus qu'il y a un an"],
+          ['vivienda habitual', "résidence principale"], ['solo', "seulement"], ['subir', "augmenter"], ['al año', "par an"],
+          ['hasta finales de', "jusqu'à la fin de"], ['el Congreso', "le Congrès (la chambre des députés)"],
+          ['aprueba', "approuve"], ['la empresa', "l'entreprise"]
         ],
         questions: [
-          { q: "Que dit le gouvernement ?", choices: ["La situation économique est bonne", "Les prix vont baisser", "Il n'y aura pas d'élections"], answer: 0, why: "« Según el gobierno, la situación económica del país es buena »." },
-          { q: "Quel est le problème de beaucoup de familles ?", choices: ["Trouver du travail", "Payer le loyer", "Lire le journal"], answer: 1, why: "« Muchas familias no pueden pagar el alquiler »." },
-          { q: "Que commence le Parlement cette semaine ?", choices: ["Les élections", "Les vacances", "Le débat sur une loi sur le logement"], answer: 2, why: "« Empieza esta semana el debate sobre una nueva ley de vivienda »." }
+          { q: "Quel est le prix moyen du loyer en Espagne, selon Idealista ?", choices: ["15,1 euros par mètre carré", "5,6 euros par mètre carré", "2 euros par mètre carré"], answer: 0, why: "« El precio medio del alquiler en España es de 15,1 euros por metro cuadrado ». Le 5,6 % est la hausse sur un an." },
+          { q: "Que prévoit le nouveau décret ?", choices: ["Les loyers vont baisser de 2 %", "Le loyer d'un contrat ne peut augmenter que de 2 % par an", "Les loyers ne peuvent plus augmenter du tout"], answer: 1, why: "« Solo puede subir un 2 % al año hasta finales de 2027 »." },
+          { q: "Que prévoit l'entreprise Solvia ?", choices: ["Les prix des loyers vont baisser", "Les prix des loyers ne vont plus bouger", "Les prix des loyers peuvent encore augmenter"], answer: 2, why: "« Los precios del alquiler todavía pueden subir entre un 5 % y un 8 % en un año »." }
         ]
       },
       grammar: `
@@ -225,7 +229,7 @@ window.COURSE = {
 <h3>Le piège du jour</h3>
 <p><b>La gente</b> est un singulier : <i>La gente <b>quiere</b> una solución</i> (les gens veulent).</p>`,
       listening: [
-        { id: 'c1-l3-o1', es: 'El gobierno quiere una solución.', fr: ["Le gouvernement veut une solution."] },
+        { id: 'c1-l3-o1', es: 'El Gobierno quiere una solución.', fr: ["Le gouvernement veut une solution."] },
         { id: 'c1-l3-o2', es: 'Hay elecciones en el país esta semana.', fr: ["Il y a des élections dans le pays cette semaine.", "Cette semaine il y a des élections dans le pays.", "Il y a des élections cette semaine dans le pays."] },
         { id: 'c1-l3-o3', es: 'La gente todavía no puede pagar.', fr: ["Les gens ne peuvent pas encore payer.", "Les gens ne peuvent toujours pas payer.", "Les gens ne peuvent encore pas payer."] }
       ],
@@ -271,9 +275,9 @@ window.COURSE = {
       ],
       reading: {
         title: 'El tiempo y los planes',
-        text: 'Según la televisión, este fin de semana va a hacer mucho calor en el sur del país: las temperaturas van a llegar a cuarenta grados. En el norte va a llover el sábado, pero el domingo va a hacer sol. Marta y su familia van a viajar a la costa en tren. Van a salir mañana temprano y van a llegar por la tarde. «Si llueve, no pasa nada», dice Marta. «Vamos a visitar la ciudad y luego vamos a comer en un buen restaurante.»',
+        text: 'Según la televisión, este fin de semana va a hacer mucho calor en el sur del país: las temperaturas van a llegar a los cuarenta grados. En el norte va a llover el sábado, pero el domingo va a hacer sol. Marta y su familia van a viajar a la costa en tren. Van a salir mañana temprano y van a llegar por la tarde. «Si llueve, no pasa nada», dice Marta. «Vamos a visitar la ciudad y luego vamos a comer en un buen restaurante».',
         help: [
-          ['este', "ce"], ['cuarenta grados', "quarante degrés"], ['el sábado', "le samedi"],
+          ['este', "ce"], ['cuarenta grados', "quarante degrés"], ['el sábado', "samedi"],
           ['si llueve', "s'il pleut"], ['dice', "dit"], ['buen', "bon"]
         ],
         questions: [
@@ -298,7 +302,8 @@ window.COURSE = {
 <h3>Les pièges du jour</h3>
 <p><b>Mañana</b> = demain, <b>la mañana</b> = le matin. « Demain matin » se dit <i>mañana por la mañana</i>.</p>
 <p><b>Salir</b> est irrégulier à la première personne : <i>sal<b>g</b>o</i>.</p>
-<p>Faux ami : <b>largo</b> veut dire « long », pas « large ».</p>`,
+<p>Faux ami : <b>largo</b> veut dire « long », pas « large ».</p>
+<p><b>El tiempo</b> a deux sens, comme en français : le temps qui passe (<i>no tengo tiempo</i>) et le temps qu'il fait (<i>hace buen tiempo</i>).</p>`,
       listening: [
         { id: 'c1-l4-o1', es: 'Mañana va a llover en el norte.', fr: ["Demain il va pleuvoir dans le nord.", "Demain il va pleuvoir au nord.", "Il va pleuvoir demain dans le nord.", "Il va pleuvoir dans le nord demain.", "Il va pleuvoir demain au nord.", "Il va pleuvoir au nord demain."] },
         { id: 'c1-l4-o2', es: 'Vamos a viajar el próximo fin de semana.', fr: ["Nous allons voyager le week-end prochain.", "On va voyager le week-end prochain.", "Nous allons voyager le prochain week-end.", "Nous allons voyager le weekend prochain.", "On va voyager le weekend prochain."] },
@@ -307,12 +312,12 @@ window.COURSE = {
       writing: [
         { id: 'c1-l4-x1', fr: "Je vais voyager demain.", es: ['Voy a viajar mañana.', 'Mañana voy a viajar.', 'Yo voy a viajar mañana.'] },
         { id: 'c1-l4-x2', fr: "Il va faire froid ce week-end.", es: ['Va a hacer frío este fin de semana.', 'Este fin de semana va a hacer frío.'], hint: "« Ce » = este." },
-        { id: 'c1-l4-x3', fr: "Nous allons arriver tôt.", es: ['Vamos a llegar temprano.', 'Nosotros vamos a llegar temprano.', 'Nosotras vamos a llegar temprano.'] },
-        { id: 'c1-l4-x4', fr: "Qu'est-ce que tu vas faire ensuite ?", es: ['¿Qué vas a hacer luego?', '¿Qué vas a hacer después?', '¿Luego qué vas a hacer?', '¿Qué vas a hacer tú luego?'] }
+        { id: 'c1-l4-x3', fr: "Nous allons arriver tôt.", es: ['Vamos a llegar temprano.', 'Nosotros vamos a llegar temprano.', 'Nosotras vamos a llegar temprano.', 'Vamos a llegar pronto.', 'Nosotros vamos a llegar pronto.'] },
+        { id: 'c1-l4-x4', fr: "Qu'est-ce que tu vas faire ensuite ?", es: ['¿Qué vas a hacer luego?', '¿Qué vas a hacer después?', '¿Luego qué vas a hacer?', '¿Qué vas a hacer tú luego?', '¿Y luego qué vas a hacer?', '¿Qué vas a hacer tú después?', '¿Después qué vas a hacer?'] }
       ],
       speaking: [
         { id: 'c1-l4-p1', fr: "Il fait très chaud.", es: ['Hace mucho calor.'] },
-        { id: 'c1-l4-p2', fr: "Je vais partir tôt demain.", es: ['Voy a salir temprano mañana.', 'Mañana voy a salir temprano.', 'Voy a salir mañana temprano.'] },
+        { id: 'c1-l4-p2', fr: "Je vais partir tôt demain.", es: ['Voy a salir temprano mañana.', 'Mañana voy a salir temprano.', 'Voy a salir mañana temprano.', 'Yo voy a salir temprano mañana.', 'Mañana voy a salir pronto.', 'Voy a salir pronto mañana.'] },
         { id: 'c1-l4-p3', fr: "Ça ne fait rien.", es: ['No pasa nada.'] }
       ]
     },
@@ -367,7 +372,7 @@ window.COURSE = {
 <tr><td>vosotros</td><td><b>habéis</b> trabajado</td><td>vous avez travaillé</td></tr>
 <tr><td>ellos, ellas</td><td><b>han</b> trabajado</td><td>ils, elles ont travaillé</td></tr>
 </tbody></table></div>
-<p>Le participe : verbes en -ar → <b>-ado</b> (hablar → hablado) ; verbes en -er et -ir → <b>-ido</b> (comer → comido, vivir → vivido).</p>
+<p>Le participe : verbes en -ar → <b>-ado</b> (hablar → hablado) ; verbes en -er et -ir → <b>-ido</b> (comer → comido, vivir → vivido). Attention à l'accent de <i>leer → le<b>í</b>do</i>.</p>
 <h3>Trois différences avec le français</h3>
 <p><b>Toujours haber, jamais « être »</b> : <i><b>He</b> ido</i> = je suis allé.</p>
 <p><b>Le participe ne s'accorde pas</b> : <i>Carmen ha id<b>o</b></i> (elle est allée).</p>
@@ -384,13 +389,13 @@ window.COURSE = {
 <p>On emploie ce temps quand la période n'est pas terminée : <i>hoy, esta semana, este año, todavía no, ya</i>.</p>`,
       listening: [
         { id: 'c1-l5-o1', es: 'Hoy he trabajado mucho.', fr: ["Aujourd'hui j'ai beaucoup travaillé.", "J'ai beaucoup travaillé aujourd'hui."] },
-        { id: 'c1-l5-o2', es: 'Todavía no hemos comido.', fr: ["Nous n'avons pas encore mangé.", "On n'a pas encore mangé.", "Nous n'avons toujours pas mangé.", "On n'a toujours pas mangé."] },
+        { id: 'c1-l5-o2', es: 'Todavía no hemos comido.', fr: ["Nous n'avons pas encore mangé.", "On n'a pas encore mangé.", "Nous n'avons toujours pas mangé.", "On n'a toujours pas mangé.", "Nous n'avons pas encore déjeuné.", "On n'a pas encore déjeuné."] },
         { id: 'c1-l5-o3', es: '¿Has visto la película?', fr: ["As-tu vu le film ?", "Tu as vu le film ?", "Est-ce que tu as vu le film ?"] }
       ],
       writing: [
         { id: 'c1-l5-x1', fr: "J'ai écrit un message.", es: ['He escrito un mensaje.', 'Yo he escrito un mensaje.'] },
         { id: 'c1-l5-x2', fr: "Elle est allée au travail.", es: ['Ha ido al trabajo.', 'Ella ha ido al trabajo.'], hint: "Toujours haber, et le participe ne s'accorde pas." },
-        { id: 'c1-l5-x3', fr: "Nous n'avons pas encore terminé.", es: ['Todavía no hemos terminado.', 'No hemos terminado todavía.', 'Aún no hemos terminado.', 'Nosotros todavía no hemos terminado.'] },
+        { id: 'c1-l5-x3', fr: "Nous n'avons pas encore terminé.", es: ['Todavía no hemos terminado.', 'No hemos terminado todavía.', 'Aún no hemos terminado.', 'No hemos terminado aún.', 'Nosotros todavía no hemos terminado.', 'Nosotras todavía no hemos terminado.', 'Todavía no hemos acabado.'] },
         { id: 'c1-l5-x4', fr: "Qu'est-ce que tu as fait aujourd'hui ?", es: ['¿Qué has hecho hoy?', '¿Qué has hecho tú hoy?', '¿Hoy qué has hecho?'], hint: "Participe de hacer : hecho." }
       ],
       speaking: [
@@ -407,7 +412,7 @@ window.COURSE = {
       words: [
         { id: 'c1-l6-w1', es: 'subir', fr: "monter, augmenter", exEs: 'Los precios han subido este año.', exFr: "Les prix ont augmenté cette année." },
         { id: 'c1-l6-w2', es: 'bajar', fr: "baisser, descendre", exEs: 'El paro ha bajado.', exFr: "Le chômage a baissé." },
-        { id: 'c1-l6-w3', es: 'anunciar', fr: "annoncer", exEs: 'El gobierno ha anunciado un plan.', exFr: "Le gouvernement a annoncé un plan." },
+        { id: 'c1-l6-w3', es: 'anunciar', fr: "annoncer", exEs: 'El Gobierno ha anunciado un plan.', exFr: "Le gouvernement a annoncé un plan." },
         { id: 'c1-l6-w4', es: 'ganar', fr: "gagner", exEs: 'La empresa ha ganado mucho dinero.', exFr: "L'entreprise a gagné beaucoup d'argent." },
         { id: 'c1-l6-w5', es: 'perder', fr: "perdre", exEs: 'He perdido el tren.', exFr: "J'ai raté le train." },
         { id: 'c1-l6-w6', es: 'la empresa', fr: "l'entreprise", exEs: 'Trabajo en una empresa grande.', exFr: "Je travaille dans une grande entreprise." },
@@ -428,17 +433,19 @@ window.COURSE = {
         ['el experto', "l'expert"], ['positivo', "positif"]
       ],
       reading: {
-        title: 'Economía: buenas y malas noticias',
-        text: 'El gobierno ha anunciado hoy los resultados económicos del año. El paro ha bajado: casi doscientas mil personas han encontrado trabajo. Sin embargo, los precios de la energía han subido un cinco por ciento, y por eso muchas familias tienen menos dinero al final del mes. Ayer, la ministra de Economía dijo en la radio que la situación «es positiva». Una gran empresa del sector anunció la semana pasada que va a abrir una fábrica nueva en el norte. Según los expertos, el próximo año va a ser mejor.',
+        title: 'Empleo y precios: los datos de octubre',
+        source: "Ministerio de Trabajo / SEPE (chômage d'octobre 2026, publié le 4 novembre) ; Seguridad Social (affiliation d'octobre 2026) ; INE (inflation d'octobre 2026).",
+        text: 'El 4 de noviembre, el Ministerio de Trabajo anunció los datos de empleo de octubre. El paro registrado subió en 43.128 personas: ahora hay 2,4 millones de parados. Sin embargo, es la cifra más baja en un mes de octubre desde 2007. Además, la Seguridad Social ganó 186.612 afiliados en octubre y hay más de 22,6 millones de afiliados, un nuevo récord. Los precios también han subido este año: según el INE, la inflación fue del 4,9 % en octubre, igual que en septiembre.',
         help: [
-          ['doscientas mil', "deux cent mille"], ['han encontrado', "ont trouvé"], ['menos', "moins"],
-          ['al final del mes', "à la fin du mois"], ['ayer', "hier"], ['dijo', "a dit"], ['anunció', "a annoncé"],
-          ['la semana pasada', "la semaine dernière"], ['abrir una fábrica', "ouvrir une usine"], ['mejor', "meilleur"]
+          ['anunció', "a annoncé"], ['los datos de empleo', "les chiffres de l'emploi"], ['el paro registrado', "le chômage enregistré"],
+          ['subió', "a augmenté"], ['ahora', "maintenant"], ['parados', "chômeurs"], ['la cifra más baja', "le chiffre le plus bas"],
+          ['desde', "depuis"], ['además', "de plus"], ['ganó', "a gagné"], ['afiliados', "affiliés (cotisants à la Sécurité sociale)"],
+          ['el INE', "l'Institut national de statistique (l'équivalent de l'INSEE)"], ['fue', "a été"], ['igual que', "comme, le même qu'en"]
         ],
         questions: [
-          { q: "Qu'est-il arrivé au chômage ?", choices: ["Il a baissé", "Il a augmenté", "Il n'a pas changé"], answer: 0, why: "« El paro ha bajado: casi doscientas mil personas han encontrado trabajo »." },
-          { q: "Pourquoi beaucoup de familles ont-elles moins d'argent ?", choices: ["Les salaires ont baissé", "Les prix de l'énergie ont augmenté", "Les impôts ont augmenté"], answer: 1, why: "« Los precios de la energía han subido un cinco por ciento, y por eso… »." },
-          { q: "Qu'a annoncé une grande entreprise ?", choices: ["Elle va fermer", "Elle a perdu de l'argent", "Elle va ouvrir une usine dans le nord"], answer: 2, why: "« Va a abrir una fábrica nueva en el norte »." }
+          { q: "Qu'est-il arrivé au chômage en octobre ?", choices: ["Il a augmenté de 43 128 personnes", "Il a baissé de 43 128 personnes", "Il n'a pas changé"], answer: 0, why: "« El paro registrado subió en 43.128 personas ». Subir = augmenter." },
+          { q: "Que dit le texte du nombre total de chômeurs (2,4 millions) ?", choices: ["C'est le plus haut depuis 2007", "C'est le plus bas pour un mois d'octobre depuis 2007", "Il est identique à celui de septembre"], answer: 1, why: "« Es la cifra más baja en un mes de octubre desde 2007 »." },
+          { q: "Quelle a été l'inflation en octobre ?", choices: ["2,4 %", "22,6 %", "4,9 %"], answer: 2, why: "« La inflación fue del 4,9 % en octubre, igual que en septiembre »." }
         ]
       },
       grammar: `
@@ -457,18 +464,18 @@ window.COURSE = {
 <tr><td>haber</td><td><b>hubo</b></td><td></td><td>il y a eu</td></tr>
 </tbody></table></div>
 <h3>L'indice qui ne trompe pas</h3>
-<p>Un <b>-ó</b> accentué à la fin du verbe signale presque toujours le passé : <i>anunci<b>ó</b></i> = il a annoncé, alors que <i>anuncio</i> = j'annonce.</p>
+<p>Un <b>-ó</b> accentué à la fin du verbe signale presque toujours le passé : <i>anunci<b>ó</b></i> = il a annoncé, alors que <i>anuncio</i> = j'annonce. Les irréguliers (<i>dijo, hizo, tuvo, fue</i>) n'ont pas cet accent : il faut les reconnaître par cœur.</p>
 <h3>Relier les idées</h3>
 <p><b>Sin embargo</b> oppose (cependant), <b>por eso</b> explique la conséquence (c'est pourquoi).</p>`,
       listening: [
-        { id: 'c1-l6-o1', es: 'Los precios han subido este año.', fr: ["Les prix ont augmenté cette année.", "Les prix ont monté cette année.", "Cette année les prix ont augmenté."] },
+        { id: 'c1-l6-o1', es: 'Los precios han subido este año.', fr: ["Les prix ont augmenté cette année.", "Les prix ont monté cette année.", "Cette année les prix ont augmenté.", "Cette année les prix ont monté."] },
         { id: 'c1-l6-o2', es: 'Sin embargo, el paro ha bajado.', fr: ["Cependant, le chômage a baissé.", "Pourtant le chômage a baissé.", "Toutefois le chômage a baissé.", "Néanmoins le chômage a baissé.", "Le chômage a cependant baissé."] },
-        { id: 'c1-l6-o3', es: 'La empresa ha perdido casi todo el dinero.', fr: ["L'entreprise a perdu presque tout l'argent.", "L'entreprise a perdu presque tout son argent."] }
+        { id: 'c1-l6-o3', es: 'La empresa ha perdido casi todo el dinero.', fr: ["L'entreprise a perdu presque tout l'argent.", "L'entreprise a perdu presque tout son argent.", "La société a perdu presque tout l'argent.", "La société a perdu presque tout son argent."] }
       ],
       writing: [
-        { id: 'c1-l6-x1', fr: "Le gouvernement a annoncé un plan.", es: ['El gobierno ha anunciado un plan.'] },
+        { id: 'c1-l6-x1', fr: "Le gouvernement a annoncé un plan.", es: ['El Gobierno ha anunciado un plan.'] },
         { id: 'c1-l6-x2', fr: "Les prix ont baissé cette semaine.", es: ['Los precios han bajado esta semana.', 'Esta semana los precios han bajado.', 'Esta semana han bajado los precios.', 'Han bajado los precios esta semana.'] },
-        { id: 'c1-l6-x3', fr: "J'ai presque terminé.", es: ['Casi he terminado.', 'Ya casi he terminado.', 'He terminado casi.'], hint: "« Casi » se place avant haber." },
+        { id: 'c1-l6-x3', fr: "J'ai presque terminé.", es: ['Casi he terminado.', 'Ya casi he terminado.', 'Casi he acabado.'], hint: "« Casi » se place avant haber." },
         { id: 'c1-l6-x4', fr: "L'entreprise a gagné plus d'argent.", es: ['La empresa ha ganado más dinero.'] }
       ],
       speaking: [
@@ -507,7 +514,7 @@ window.COURSE = {
       ],
       reading: {
         title: '¿Qué piensas de las noticias?',
-        text: 'Ana y Luis hablan de las noticias. —¿Has leído el periódico hoy? —pregunta Ana. —Sí, pero no me gustan las noticias de política. Creo que siempre dicen lo mismo —dice Luis. —Depende. A mí me gusta la información internacional, porque quiero comprender el mundo. —De acuerdo, pero es difícil: hay demasiadas malas noticias. —Es verdad. Sin embargo, esta semana he leído un artículo muy bueno sobre ciencia. ¿Vamos a ver el debate esta noche? —Me da igual. Si quieres, lo vemos.',
+        text: 'Ana y Luis hablan de las noticias.\n—¿Has leído el periódico hoy? —pregunta Ana.\n—Sí, pero no me gustan las noticias de política. Creo que siempre dicen lo mismo —dice Luis.\n—Depende. A mí me gusta la información internacional, porque quiero comprender el mundo.\n—De acuerdo, pero es difícil: hay demasiadas malas noticias.\n—Es verdad. Sin embargo, esta semana he leído un artículo muy bueno sobre ciencia. ¿Vamos a ver el debate esta noche?\n—Me da igual. Si quieres, lo vemos.',
         help: [
           ['pregunta', "demande"], ['dicen lo mismo', "ils disent la même chose"], ['a mí', "moi"],
           ['comprender', "comprendre"], ['demasiadas', "trop de"], ['sobre', "sur"],
@@ -516,7 +523,7 @@ window.COURSE = {
         questions: [
           { q: "Qu'est-ce que Luis n'aime pas ?", choices: ["Les nouvelles internationales", "Les nouvelles politiques", "Les articles de science"], answer: 1, why: "« No me gustan las noticias de política »." },
           { q: "Pourquoi Ana aime-t-elle l'information internationale ?", choices: ["Parce qu'elle veut comprendre le monde", "Parce que c'est facile", "Parce qu'elle voyage beaucoup"], answer: 0, why: "« Porque quiero comprender el mundo »." },
-          { q: "Sur quel sujet Ana a-t-elle lu un très bon article ?", choices: ["La politique", "L'économie", "La science"], answer: 2, why: "« He leído un artículo muy bueno sobre ciencia »." }
+          { q: "Sur quel sujet porte le très bon article lu cette semaine ?", choices: ["La politique", "L'économie", "La science"], answer: 2, why: "« He leído un artículo muy bueno sobre ciencia »." }
         ]
       },
       grammar: `
@@ -543,14 +550,14 @@ window.COURSE = {
 <tr><td>passé composé</td><td>Hoy <b>he trabajado</b> mucho.</td></tr>
 </tbody></table></div>`,
       listening: [
-        { id: 'c1-l7-o1', es: 'Me gusta leer el periódico por la mañana.', fr: ["J'aime lire le journal le matin.", "Le matin j'aime lire le journal."] },
+        { id: 'c1-l7-o1', es: 'Me gusta leer el periódico por la mañana.', fr: ["J'aime lire le journal le matin.", "Le matin j'aime lire le journal.", "J'aime bien lire le journal le matin.", "Le matin j'aime bien lire le journal."] },
         { id: 'c1-l7-o2', es: 'Creo que es una buena idea.', fr: ["Je crois que c'est une bonne idée.", "Je pense que c'est une bonne idée."] },
-        { id: 'c1-l7-o3', es: 'No me gustan las malas noticias.', fr: ["Je n'aime pas les mauvaises nouvelles."] },
+        { id: 'c1-l7-o3', es: 'No me gustan las malas noticias.', fr: ["Je n'aime pas les mauvaises nouvelles.", "Les mauvaises nouvelles ne me plaisent pas."] },
         { id: 'c1-l7-o4', es: 'Mañana vamos a ver una película, ¿de acuerdo?', fr: ["Demain nous allons voir un film, d'accord ?", "Demain on va voir un film, d'accord ?", "Demain nous allons regarder un film, d'accord ?", "Demain on va regarder un film, d'accord ?"] }
       ],
       writing: [
         { id: 'c1-l7-x1', fr: "J'aime voyager.", es: ['Me gusta viajar.', 'A mí me gusta viajar.'] },
-        { id: 'c1-l7-x2', fr: "Je crois que c'est difficile.", es: ['Creo que es difícil.', 'Yo creo que es difícil.', 'Pienso que es difícil.'] },
+        { id: 'c1-l7-x2', fr: "Je crois que c'est difficile.", es: ['Creo que es difícil.', 'Yo creo que es difícil.', 'Pienso que es difícil.', 'Yo pienso que es difícil.'] },
         { id: 'c1-l7-x3', fr: "Je n'aime pas les nouvelles.", es: ['No me gustan las noticias.', 'A mí no me gustan las noticias.'], hint: "Plusieurs choses : gustan." },
         { id: 'c1-l7-x4', fr: "Aujourd'hui j'ai lu le journal.", es: ['Hoy he leído el periódico.', 'He leído el periódico hoy.', 'Hoy yo he leído el periódico.'] },
         { id: 'c1-l7-x5', fr: "Demain je vais travailler parce que j'ai une réunion.", es: ['Mañana voy a trabajar porque tengo una reunión.', 'Voy a trabajar mañana porque tengo una reunión.'] }

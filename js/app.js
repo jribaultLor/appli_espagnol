@@ -84,7 +84,7 @@
   function norm(s) {
     return String(s).toLowerCase()
       .replace(/[’`´]/g, "'")
-      .replace(/[¿?¡!.,;:«»"()…]/g, ' ')
+      .replace(/[¿?¡!.,;:«»"()…—–-]/g, ' ')
       .replace(/\s+/g, ' ').trim();
   }
   // Retire les accents mais garde le ñ, qui est une lettre à part entière.
@@ -156,11 +156,12 @@
   function withoutArticle(es) { return es.replace(/^(el|la|los|las|un|una) /i, ''); }
   COURSE.lessons.forEach(function (L) {
     if (L.soon) return;
-    L.words.concat(L.expressions).forEach(function (w) {
+    L.words.forEach(function (w) {
       var answers = [w.es];
       if (withoutArticle(w.es) !== w.es) answers.push(withoutArticle(w.es));
       ITEMS[w.id] = { id: w.id, fr: w.fr, answers: answers, lesson: L.id };
     });
+    L.expressions.forEach(function (w) { ITEMS[w.id] = { id: w.id, fr: w.fr, answers: [w.es], lesson: L.id }; });
     L.writing.forEach(function (x) { ITEMS[x.id] = { id: x.id, fr: x.fr, answers: x.es, hint: x.hint, lesson: L.id }; });
   });
   function introduce(id) {

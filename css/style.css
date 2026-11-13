@@ -91,7 +91,7 @@ button.link {
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { background: var(--soft); border-radius: 999px; padding: 3px 10px; font-size: .88rem; }
 .chip b { font-weight: 600; }
-.reading { font-size: 1.12rem; line-height: 1.65; }
+.reading { font-size: 1.12rem; line-height: 1.65; white-space: pre-line; }
 .choices { display: flex; flex-direction: column; gap: 8px; }
 .choices button { justify-content: flex-start; text-align: left; background: var(--card); color: var(--fg); border-color: var(--line); font-weight: 500; }
 .choices button.right { background: var(--ok-bg); border-color: var(--ok); color: var(--ok); opacity: 1; }
