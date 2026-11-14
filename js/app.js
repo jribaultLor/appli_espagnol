@@ -2,6 +2,7 @@
   'use strict';
 
   var COURSE = window.COURSE;
+  var CONJ = window.CONJ || [];
   var KEY = 'espagnol-v1';
   var SKILLS = [['lire', 'Lire'], ['ecouter', 'Écouter'], ['ecrire', 'Écrire'], ['parler', 'Parler']];
   var INTERVALS = [1, 3, 7, 14, 30]; // jours avant la prochaine révision, selon la boîte
@@ -14,9 +15,11 @@
       var s = JSON.parse(localStorage.getItem(KEY));
       if (s && s.v === 1) return s;
     } catch (e) { /* stockage indisponible : on repart d'un état vide */ }
-    return { v: 1, lessons: {}, items: {}, skills: blankSkills() };
+    return { v: 1, lessons: {}, items: {}, skills: blankSkills(), settings: {}, conj: {} };
   }
   var state = load();
+  if (!state.settings) state.settings = {};
+  if (!state.conj) state.conj = {};
   var storageOk = true;
   function save() {
     try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { storageOk = false; }
@@ -347,6 +350,133 @@
     fallback(null);
   }
 
+  // ---------- Conjugaison : répétition espacée par élément « verbe × temps » ----------
+  var PERSONS = ['yo', 'tú', 'él, ella', 'nosotros', 'vosotros', 'ellos, ellas'];
+  var TENSES = [['present', 'Présent'], ['futur', 'Futur proche'], ['passe', 'Passé composé']];
+  var CONJ_NEW_PER_DAY = 3;
+  function lessonDone(id) { return !!(state.lessons[id] && state.lessons[id].done); }
+  function conjAvailable() { return CONJ.filter(function (u) { return lessonDone(u.lesson); }); }
+  function conjNewLeft() {
+    var n = state.conjNew && state.conjNew.day === today() ? state.conjNew.count : 0;
+    return Math.max(0, CONJ_NEW_PER_DAY - n);
+  }
+  // Éléments à revoir aujourd'hui : ceux qui sont dus, puis quelques nouveautés par jour.
+  function conjDue() {
+    var t = today(), due = [], fresh = [];
+    conjAvailable().forEach(function (u) {
+      var st = state.conj[u.id];
+      if (!st) fresh.push(u); else if (st.due <= t) due.push(u);
+    });
+    due.sort(function (a, b) { return state.conj[a.id].due - state.conj[b.id].due; });
+    return due.concat(fresh.slice(0, conjNewLeft()));
+  }
+  // La phrase ratée revient en priorité ; sinon on fait tourner les personnes.
+  function conjPick(u) {
+    var st = state.conj[u.id];
+    if (st && st.miss != null) return st.miss;
+    return (st ? st.n : 0) % u.cards.length;
+  }
+  function recordConj(u, idx, res) {
+    var t = today(), st = state.conj[u.id];
+    if (!st) {
+      st = state.conj[u.id] = { box: 0, due: 0, n: 0, miss: null };
+      state.conjNew = { day: t, count: (state.conjNew && state.conjNew.day === t ? state.conjNew.count : 0) + 1 };
+    }
+    var wasDue = st.due <= t;
+    st.n = idx + 1;
+    if (res === 'ok') {
+      st.miss = null;
+      if (wasDue) { st.box = Math.min(st.box + 1, INTERVALS.length); st.due = t + INTERVALS[st.box - 1]; }
+    } else if (res === 'almost') {
+      // Accent oublié : l'élément ne recule pas, mais n'avance pas non plus.
+      st.miss = idx;
+      if (wasDue) st.due = t + (st.box ? INTERVALS[st.box - 1] : 1);
+    } else {
+      st.miss = idx; st.box = 0; st.due = t + 1;
+    }
+  }
+  function conjAnswers(card) { return typeof card.a === 'string' ? [card.a] : card.a; }
+  function judgeConj(input, card) {
+    var ni = norm(input), answers = conjAnswers(card), i;
+    for (i = 0; i < answers.length; i++) if (ni === norm(answers[i])) return 'ok';
+    for (i = 0; i < answers.length; i++) if (strip(ni) === strip(norm(answers[i]))) return 'almost';
+    return 'ko';
+  }
+  // Phrase complète : trou rempli, indications de personne retirées, majuscule rétablie.
+  function conjFull(card) {
+    var t = card.es.replace('___', conjAnswers(card)[0]).replace(/\((yo|tú|nosotros|vosotros)\)\s*/g, '').replace(/\s+([?.!,:])/g, '$1').replace(/\s+/g, ' ').trim();
+    var i = /^[¿¡]/.test(t) ? 1 : 0;
+    return t.slice(0, i) + t.charAt(i).toUpperCase() + t.slice(i + 1);
+  }
+  function conjSentence(card, filled) {
+    var parts = card.es.split('___');
+    return el('div', { class: 'prompt es', lang: 'es' }, [
+      parts[0], el('span', { class: filled ? 'filled' : 'blank', text: filled ? conjAnswers(card)[0] : ' ' }), parts[1] || ''
+    ]);
+  }
+  function paradigm(card) {
+    if (!card.forms) return null;
+    return el('div', { class: 'paradigm' }, card.forms.map(function (f, i) {
+      return el('span', { class: i === card.p ? 'hit' : '' }, [el('small', { text: PERSONS[i] + ' ' }), el('b', { class: 'es', lang: 'es', text: f })]);
+    }));
+  }
+  // done(res) avec res = 'ok', 'almost' (accent oublié) ou 'ko'.
+  function conjExercise(box, u, idx, done) {
+    var card = u.cards[idx];
+    var input = textInput('es', 'Le verbe conjugué');
+    var zone = el('div', { class: 'stack' });
+    var check = el('button', { class: 'wide', type: 'button' }, ['Vérifier']);
+    var form = el('div', { class: 'stack' }, [input, accentBar(input), check]);
+    function verify() {
+      if (!input.value.trim()) { input.focus(); return; }
+      var res = judgeConj(input.value, card);
+      input.disabled = true; form.removeChild(check);
+      var full = el('div', { class: 'model es', lang: 'es', text: conjFull(card) });
+      var rule = el('div', { class: 'yours', text: u.rule });
+      if (res === 'ok') {
+        zone.appendChild(feedback('ok', 'Juste', [full]));
+        zone.appendChild(el('div', { class: 'row' }, [listenBtn(conjFull(card))]));
+        zone.appendChild(continueBtn('Continuer', function () { done('ok'); }));
+        return;
+      }
+      if (res === 'almost') {
+        zone.appendChild(feedback('almost', 'Presque : attention à l\'accent', [
+          el('div', { class: 'model es', lang: 'es', text: conjAnswers(card)[0] }), full, paradigm(card),
+          el('div', { class: 'yours', text: 'En conjugaison, l\'accent fait partie de la forme. Vous reverrez cette phrase.' })
+        ]));
+        zone.appendChild(el('div', { class: 'row' }, [listenBtn(conjFull(card))]));
+        zone.appendChild(continueBtn('Continuer', function () { done('almost'); }));
+        return;
+      }
+      var fb = feedback('ko', 'À revoir', [
+        el('div', { class: 'model es', lang: 'es', text: conjAnswers(card)[0] }), full, paradigm(card), rule,
+        el('div', { class: 'yours', text: 'Votre réponse : ' + input.value })
+      ]);
+      zone.appendChild(fb);
+      var again = textInput('es', 'Retapez la forme correcte');
+      var go = el('button', { class: 'wide', type: 'button', disabled: true, onclick: function () { done(res); } }, ['Continuer']);
+      function unlock() { go.disabled = false; }
+      again.addEventListener('input', function () { if (judgeConj(again.value, card) !== 'ko') { again.disabled = true; unlock(); go.focus(); } });
+      var row = el('div', { class: 'row' }, [listenBtn(conjFull(card)), el('button', {
+        class: 'quiet small', type: 'button',
+        onclick: function () { res = 'ok'; fb.className = 'fb info'; fb.firstChild.textContent = 'Compté comme juste'; again.disabled = true; unlock(); row.removeChild(this); }
+      }, ['Ma réponse était bonne'])]);
+      zone.appendChild(el('div', { class: 'stack' }, [again, accentBar(again)]));
+      zone.appendChild(row);
+      zone.appendChild(go);
+      setTimeout(function () { again.focus(); }, 0);
+    }
+    check.addEventListener('click', verify);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !input.disabled) verify(); });
+    box.appendChild(el('div', { class: 'stack' }, [
+      el('div', { class: 'eyebrow', text: 'Conjuguez : ' + card.inf }),
+      conjSentence(card, false),
+      el('div', { class: 'muted', text: card.fr })
+    ]));
+    box.appendChild(form); box.appendChild(zone);
+    setTimeout(function () { input.focus(); }, 0);
+  }
+
   // ---------- Écrans d'une leçon ----------
   function vocabList(list) {
     return el('ul', { class: 'vocab' }, list.map(function (w) {
@@ -455,7 +585,7 @@
         writeExercise(box, { fr: x.fr, answers: x.es, hint: x.hint }, function (ok) { recordSkill('ecrire', ok, run); recordItem(x.id, ok); next(); });
       });
     });
-    L.speaking.forEach(function (p) {
+    if (!state.settings.noSpeak) L.speaking.forEach(function (p) {
       add('Oral', function (box, next) {
         speakExercise(box, p, function (ok) { if (ok !== null) recordSkill('parler', ok, run); next(); });
       });
@@ -506,7 +636,7 @@
       ]),
       el('div', { class: 'card stack' }, [
         el('div', { class: 'eyebrow', text: 'La suite' }),
-        el('p', { text: 'Demain : une révision de 3 minutes des mots et phrases d\'aujourd\'hui.' }),
+        el('p', { text: 'Demain : une révision de 3 minutes des mots, des phrases et de la conjugaison d\'aujourd\'hui.' }),
         el('p', { text: nextL && !nextL.soon ? 'Après-demain : leçon ' + (index + 2) + ', « ' + nextL.title + ' ».' : (nextL ? 'La leçon suivante arrive bientôt.' : 'Vous avez terminé le cycle 1. Continuez les révisions du jour : ce sont elles qui fixent ce que vous avez appris.') })
       ]),
       el('button', { class: 'wide', type: 'button', onclick: home }, ['Retour à l\'accueil'])
@@ -514,34 +644,125 @@
   }
 
   // ---------- Révision du jour ----------
-  function startReview() {
-    var queue = dueItems().slice(0, 8), total = queue.length, done = 0, good = 0, retried = {};
+  // 8 éléments au plus : jusqu'à 3 de conjugaison, puis du vocabulaire et des phrases.
+  function reviewQueue() {
+    var conj = conjDue().slice(0, 3).map(function (u) { return { kind: 'conj', id: u.id, unit: u, idx: conjPick(u) }; });
+    var due = dueItems();
+    function isSentence(it) { return /-x\d+$/.test(it.id); }
+    var vocab = due.filter(function (it) { return !isSentence(it); });
+    var sent = due.filter(isSentence);
+    var room = 8 - conj.length;
+    var pickV = vocab.splice(0, 3), pickS = sent.splice(0, 2);
+    var rest = vocab.concat(sent);
+    while (pickV.length + pickS.length < room && rest.length) pickV.push(rest.shift());
+    var others = [], i;
+    for (i = 0; i < Math.max(pickV.length, pickS.length); i++) {
+      if (pickV[i]) others.push({ kind: 'item', id: pickV[i].id, it: pickV[i] });
+      if (pickS[i]) others.push({ kind: 'item', id: pickS[i].id, it: pickS[i] });
+    }
+    others = others.slice(0, room);
+    // On alterne pour ne pas enchaîner trois conjugaisons.
+    var out = [];
+    while (others.length || conj.length) {
+      if (others.length) out.push(others.shift());
+      if (conj.length) out.push(conj.shift());
+      if (others.length) out.push(others.shift());
+    }
+    return out;
+  }
+  function runSession(queue, label, endText) {
+    var total = queue.length, done = 0, good = 0, retried = {};
     function render() {
       if (!queue.length) {
         return show([
-          el('div', { class: 'stack' }, [el('div', { class: 'eyebrow', text: 'Révision terminée' }), el('h1', { text: good + ' sur ' + total + ' du premier coup' })]),
-          el('p', { class: 'muted', text: 'Les éléments réussis reviendront plus tard, les autres dès demain.' }),
+          el('div', { class: 'stack' }, [el('div', { class: 'eyebrow', text: label + ' terminée' }), el('h1', { text: good + ' sur ' + total + ' du premier coup' })]),
+          el('p', { class: 'muted', text: endText }),
           el('button', { class: 'wide', type: 'button', onclick: home }, ['Retour à l\'accueil'])
         ]);
       }
-      var it = queue.shift(), box = el('div', { class: 'screen' });
+      var q = queue.shift(), box = el('div', { class: 'screen' });
       show([
         el('div', { class: 'topbar' }, [
           el('button', { class: 'quiet small', type: 'button', onclick: home }, ['Quitter']),
-          meter(done / total), el('span', { class: 'muted', style: 'font-size:.85rem', text: 'Révision' })
+          meter(done / total), el('span', { class: 'muted', style: 'font-size:.85rem', text: label })
         ]),
         box
       ]);
-      writeExercise(box, { fr: it.fr, answers: it.answers, hint: retried[it.id] ? it.hint : null, label: 'Comment dit-on…' }, function (ok) {
-        if (!retried[it.id]) {
-          recordItem(it.id, ok); done++;
-          if (ok) good++; else { retried[it.id] = true; queue.push(it); }
+      function after(ok, record) {
+        if (!retried[q.id]) {
+          record(); done++;
+          if (ok) good++; else { retried[q.id] = true; queue.push(q); }
           save();
         }
         render();
-      });
+      }
+      if (q.kind === 'conj') {
+        conjExercise(box, q.unit, q.idx, function (res) {
+          after(res === 'ok', function () { if (!q.extra) recordConj(q.unit, q.idx, res); });
+        });
+      } else {
+        writeExercise(box, { fr: q.it.fr, answers: q.it.answers, hint: retried[q.id] ? q.it.hint : null, label: 'Comment dit-on…' }, function (ok) {
+          after(ok, function () { recordItem(q.id, ok); });
+        });
+      }
     }
     render();
+  }
+  function startReview() {
+    runSession(reviewQueue(), 'Révision', 'Les éléments réussis reviendront plus tard, les autres dès demain.');
+  }
+
+  // ---------- Conjugaison à la demande ----------
+  function conjState(u) {
+    var st = state.conj[u.id];
+    if (!st) return ['todo', 'à découvrir'];
+    return st.box >= 3 ? ['done', 'acquis'] : ['doing', 'en cours'];
+  }
+  function startConj(tense) {
+    var t = today();
+    var pool = conjAvailable().filter(function (u) { return !tense || u.tense === tense || u.tense === 'mix'; });
+    function rank(u) { var st = state.conj[u.id]; return !st ? 1 : st.due <= t ? 0 : 2 + st.box; }
+    pool.sort(function (a, b) { return rank(a) - rank(b); });
+    var queue = pool.slice(0, 10).map(function (u) { return { kind: 'conj', id: u.id, unit: u, idx: conjPick(u) }; });
+    // Moins de 10 éléments disponibles : un second passage sur une autre phrase, non compté.
+    pool.slice(0, 10 - queue.length).forEach(function (u) {
+      queue.push({ kind: 'conj', id: u.id + '#2', unit: u, idx: (conjPick(u) + 1) % u.cards.length, extra: true });
+    });
+    runSession(queue, 'Conjugaison', 'Les formes réussies reviendront plus tard, les autres dès demain.');
+  }
+  function conjHome() {
+    if (synth) synth.cancel();
+    var avail = conjAvailable();
+    var nodes = [
+      el('div', { class: 'topbar' }, [el('button', { class: 'quiet small', type: 'button', onclick: home }, ['‹ Accueil'])]),
+      el('div', { class: 'stack', style: 'gap:2px' }, [el('div', { class: 'eyebrow', text: 'À la demande' }), el('h1', { text: 'Conjugaison' })])
+    ];
+    if (!avail.length) {
+      nodes.push(el('p', { class: 'muted', text: 'Terminez une leçon pour débloquer ses exercices de conjugaison.' }));
+    } else {
+      var filters = TENSES.filter(function (T) { return avail.some(function (u) { return u.tense === T[0]; }); });
+      nodes.push(el('div', { class: 'card stack' }, [
+        el('p', { text: 'Dix phrases à trou : vous tapez seulement le verbe.' }),
+        el('button', { class: 'wide', type: 'button', onclick: function () { startConj(null); } }, ['Séance recommandée']),
+        filters.length > 1 ? el('div', { class: 'row' }, [el('span', { class: 'muted', text: 'Ou un seul temps :' })].concat(filters.map(function (T) {
+          return el('button', { class: 'ghost small', type: 'button', onclick: function () { startConj(T[0]); } }, [T[1]]);
+        }))) : null
+      ]));
+    }
+    COURSE.lessons.forEach(function (L, idx) {
+      var units = CONJ.filter(function (u) { return u.lesson === L.id; });
+      if (!units.length) return;
+      var open = lessonDone(L.id);
+      nodes.push(el('div', { class: 'card stack' + (open ? '' : ' locked') }, [
+        el('div', { class: 'eyebrow', text: 'Leçon ' + (idx + 1) + (open ? '' : ' · après la leçon') }),
+        el('ul', { class: 'units' }, units.map(function (u) {
+          var cs = open ? conjState(u) : ['todo', 'à découvrir'];
+          return el('li', null, [el('span', { text: u.title }), el('span', { class: 'state ' + cs[0], text: cs[1] })]);
+        }))
+      ]));
+    });
+    nodes.push(el('p', { class: 'muted', text: 'Une notion est acquise après trois réussites à plusieurs jours d\'écart.' }));
+    show(nodes);
   }
 
   // ---------- Fiches à relire : vocabulaire et grammaire d'une leçon ----------
@@ -581,7 +802,7 @@
   // ---------- Accueil ----------
   function home() {
     if (synth) synth.cancel();
-    var due = dueItems().length;
+    var due = reviewQueue().length;
     var nextIndex = -1, i;
     for (i = 0; i < COURSE.lessons.length; i++) {
       var L = COURSE.lessons[i], ls = state.lessons[L.id];
@@ -593,8 +814,8 @@
 
     var todayCard = el('div', { class: 'card today stack' }, [el('div', { class: 'eyebrow', text: 'Aujourd\'hui' })]);
     if (due > 0) {
-      todayCard.appendChild(el('h2', { text: 'Révision : ' + due + (due > 1 ? ' éléments' : ' élément') + ' à revoir' }));
-      todayCard.appendChild(el('p', { class: 'muted', text: 'Environ 3 minutes. C\'est la révision qui fixe la mémoire.' }));
+      todayCard.appendChild(el('h2', { text: 'Révision du jour : ' + due + (due > 1 ? ' éléments' : ' élément') }));
+      todayCard.appendChild(el('p', { class: 'muted', text: 'Environ 3 minutes : vocabulaire, phrases et conjugaison.' }));
       todayCard.appendChild(el('button', { type: 'button', onclick: startReview }, ['Réviser maintenant']));
     }
     if (nextIndex >= 0) {
@@ -614,10 +835,25 @@
     Object.keys(state.items).forEach(function (id) { if (ITEMS[id]) { seen++; if (state.items[id].box >= 3) solid++; } });
 
     var confirmZone = el('span');
+    var conjDone = 0, conjSeen = 0;
+    CONJ.forEach(function (u) { var st = state.conj[u.id]; if (st) { conjSeen++; if (st.box >= 3) conjDone++; } });
+    var noSpeak = el('input', { type: 'checkbox', id: 'opt-nospeak' });
+    noSpeak.checked = !!state.settings.noSpeak;
+    noSpeak.addEventListener('change', function () { state.settings.noSpeak = noSpeak.checked; save(); });
     show([
       el('header', { class: 'stack', style: 'gap:2px' }, [el('div', { class: 'eyebrow', text: COURSE.title + ' · 7 leçons en 2 semaines' }), el('h1', { text: 'Espagnol au quotidien' })]),
       storageOk ? null : el('div', { class: 'fb ko' }, [el('div', { class: 'v', text: 'La progression ne peut pas être enregistrée sur ce navigateur (navigation privée ?).' })]),
       todayCard,
+      el('label', { class: 'card option', for: 'opt-nospeak' }, [
+        noSpeak,
+        el('span', null, [el('b', { text: 'Je ne peux pas parler' }), el('br'), el('span', { class: 'muted', text: 'Dans les transports par exemple : les exercices d\'oral des leçons sont passés.' })])
+      ]),
+      el('div', { class: 'card stack' }, [
+        el('div', { class: 'spread' }, [
+          el('div', null, [el('div', { class: 'eyebrow', text: 'Conjugaison' }), el('div', { class: 'muted', text: conjSeen ? conjDone + ' notions acquises sur ' + CONJ.length : 'Des phrases à trou, à la demande.' })]),
+          el('button', { class: 'ghost small', type: 'button', onclick: conjHome }, ['Ouvrir'])
+        ])
+      ]),
       el('div', { class: 'card stack' }, [
         el('div', { class: 'eyebrow', text: 'Programme' }),
         el('ol', { class: 'lessons' }, COURSE.lessons.map(function (L, idx) {
@@ -654,7 +890,7 @@
             confirmZone.innerHTML = '';
             confirmZone.appendChild(el('span', { class: 'row' }, [
               el('span', { text: 'Tout effacer ?' }),
-              el('button', { class: 'small', type: 'button', onclick: function () { state = { v: 1, lessons: {}, items: {}, skills: blankSkills() }; save(); home(); } }, ['Oui, effacer']),
+              el('button', { class: 'small', type: 'button', onclick: function () { state = { v: 1, lessons: {}, items: {}, skills: blankSkills(), settings: {}, conj: {} }; save(); home(); } }, ['Oui, effacer']),
               el('button', { class: 'ghost small', type: 'button', onclick: function () { confirmZone.innerHTML = ''; } }, ['Annuler'])
             ]));
           }
@@ -665,6 +901,6 @@
   }
 
   // Exposé pour les tests automatiques.
-  window.__espagnol = { judge: judge, norm: norm, strip: strip };
+  window.__espagnol = { judge: judge, norm: norm, strip: strip, judgeConj: judgeConj, conjFull: conjFull };
   home();
 })();

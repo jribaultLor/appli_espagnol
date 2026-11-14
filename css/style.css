@@ -126,3 +126,20 @@ footer.links { font-size: .88rem; display: flex; flex-wrap: wrap; gap: 4px 16px;
 footer.links a { color: var(--muted); }
 @media (prefers-reduced-motion: no-preference) { .meter i { transition: width .25s ease; } }
 td:last-child { white-space: normal; }
+
+/* Conjugaison */
+.blank { display: inline-block; min-width: 4.5em; border-bottom: 3px solid var(--gold); margin: 0 .15em; }
+.filled { color: var(--primary); border-bottom: 3px solid var(--gold); }
+.paradigm { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: .92rem; }
+.paradigm span { white-space: nowrap; }
+.paradigm .hit { background: var(--mark); color: var(--mark-fg); border-radius: 4px; padding: 0 4px; }
+.paradigm .hit small { color: inherit; }
+.units { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.units li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.state { font-size: .8rem; font-weight: 600; white-space: nowrap; border-radius: 999px; padding: 2px 10px; background: var(--soft); color: var(--muted); }
+.state.doing { background: var(--warn-bg); color: var(--warn); }
+.state.done { background: var(--ok-bg); color: var(--ok); }
+.locked { opacity: .6; }
+.option { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; line-height: 1.35; }
+.option input { width: 22px; height: 22px; margin: 2px 0 0; flex: none; accent-color: var(--primary); }
+.option .muted { font-size: .88rem; }
