@@ -257,7 +257,7 @@ window.COURSE = {
         { id: 'c1-l4-w4', es: 'el sol', fr: "le soleil", exEs: 'Hace sol.', exFr: "Il y a du soleil." },
         { id: 'c1-l4-w5', es: 'viajar', fr: "voyager", exEs: 'Vamos a viajar a Sevilla.', exFr: "Nous allons voyager à Séville." },
         { id: 'c1-l4-w6', es: 'llegar', fr: "arriver", exEs: 'El tren llega a las diez.', exFr: "Le train arrive à dix heures." },
-        { id: 'c1-l4-w7', es: 'salir', fr: "sortir, partir", exEs: 'Salgo de casa temprano.', exFr: "Je pars de la maison tôt." },
+        { id: 'c1-l4-w7', es: 'salir', fr: "sortir, partir", exEs: 'Salgo de casa temprano.', exFr: "Je pars tôt de la maison." },
         { id: 'c1-l4-w8', es: 'el viaje', fr: "le voyage", exEs: 'Es un viaje largo.', exFr: "C'est un long voyage." },
         { id: 'c1-l4-w9', es: 'el fin de semana', fr: "le week-end", exEs: 'El fin de semana no trabajo.', exFr: "Le week-end je ne travaille pas." },
         { id: 'c1-l4-w10', es: 'próximo', fr: "prochain", exEs: 'La próxima semana voy a Madrid.', exFr: "La semaine prochaine je vais à Madrid." }

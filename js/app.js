@@ -432,7 +432,7 @@
       var res = judgeConj(input.value, card);
       input.disabled = true; form.removeChild(check);
       var full = el('div', { class: 'model es', lang: 'es', text: conjFull(card) });
-      var rule = el('div', { class: 'yours', text: u.rule });
+      var rule = el('div', { class: 'yours', text: u.rule + (card.note ? ' ' + card.note : '') });
       if (res === 'ok') {
         zone.appendChild(feedback('ok', 'Juste', [full]));
         zone.appendChild(el('div', { class: 'row' }, [listenBtn(conjFull(card))]));
@@ -469,7 +469,7 @@
     check.addEventListener('click', verify);
     input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !input.disabled) verify(); });
     box.appendChild(el('div', { class: 'stack' }, [
-      el('div', { class: 'eyebrow', text: 'Conjuguez : ' + card.inf }),
+      el('div', { class: 'eyebrow', text: 'Conjuguez : ' + card.inf + (u.tense === 'passe' ? ' · passé composé' : '') }),
       conjSentence(card, false),
       el('div', { class: 'muted', text: card.fr })
     ]));

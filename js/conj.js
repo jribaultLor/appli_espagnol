@@ -63,7 +63,7 @@
     },
     {
       id: 'c1-k04', lesson: 'c1-l1', tense: 'present', title: 'Ser',
-      rule: "Ser dit ce qu'on est : identité, nationalité, métier.",
+      rule: "Ser dit ce qu'on est : identité, nationalité, origine (ser de), métier.",
       cards: [
         { es: '(yo) ___ francés.', a: 'soy', inf: 'ser', fr: "Je suis français.", p: 0, forms: SER },
         { es: 'Lucía ___ periodista.', a: 'es', inf: 'ser', fr: "Lucía est journaliste.", p: 2, forms: SER },
@@ -148,19 +148,19 @@
       rule: "Le o devient ue, sauf à nosotros et vosotros.",
       cards: [
         { es: '(yo) no ___ ir.', a: 'puedo', inf: 'poder', fr: "Je ne peux pas y aller.", p: 0, forms: PODER },
-        { es: 'Mucha gente no ___ pagar el alquiler.', a: 'puede', inf: 'poder', fr: "Beaucoup de gens ne peuvent pas payer le loyer.", p: 2, forms: PODER },
+        { es: 'Mucha gente no ___ pagar el alquiler.', a: 'puede', inf: 'poder', fr: "Beaucoup de gens ne peuvent pas payer le loyer.", p: 2, forms: PODER, note: "« La gente » est un singulier : la gente puede." },
         { es: '¿(tú) ___ empezar?', a: 'puedes', inf: 'poder', fr: "Tu peux commencer ?", p: 1, forms: PODER },
         { es: 'Nosotros no ___ empezar.', a: 'podemos', inf: 'poder', fr: "Nous ne pouvons pas commencer.", p: 3, forms: PODER }
       ]
     },
     {
       id: 'c1-k13', lesson: 'c1-l3', tense: 'present', title: 'Empezar (e → ie)',
-      rule: "Le e devient ie, sauf à nosotros et vosotros.",
+      rule: "Le e du radical devient ie (empezar → empiezo), sauf à nosotros et vosotros.",
       cards: [
         { es: 'La reunión ___ a las nueve.', a: 'empieza', inf: 'empezar', fr: "La réunion commence à neuf heures.", p: 2, forms: EMPEZAR },
         { es: '(yo) ___ a trabajar temprano.', a: 'empiezo', inf: 'empezar', fr: "Je commence à travailler tôt.", p: 0, forms: EMPEZAR },
         { es: 'Nosotros ___ esta semana.', a: 'empezamos', inf: 'empezar', fr: "Nous commençons cette semaine.", p: 3, forms: EMPEZAR },
-        { es: 'Los debates ___ esta semana.', a: 'empiezan', inf: 'empezar', fr: "Les débats commencent cette semaine.", p: 5, forms: EMPEZAR }
+        { es: 'Las elecciones ___ esta semana.', a: 'empiezan', inf: 'empezar', fr: "Les élections commencent cette semaine.", p: 5, forms: EMPEZAR }
       ]
     },
     {
@@ -188,9 +188,9 @@
       id: 'c1-k16', lesson: 'c1-l4', tense: 'present', title: 'Salir',
       rule: "Irrégulier à la première personne : salgo.",
       cards: [
-        { es: '(yo) ___ de casa temprano.', a: 'salgo', inf: 'salir', fr: "Je pars de la maison tôt.", p: 0, forms: SALIR },
+        { es: '(yo) ___ de casa temprano.', a: 'salgo', inf: 'salir', fr: "Je pars tôt de la maison.", p: 0, forms: SALIR },
         { es: 'El tren ___ a las diez.', a: 'sale', inf: 'salir', fr: "Le train part à dix heures.", p: 2, forms: SALIR },
-        { es: 'Nosotros ___ mañana.', a: 'salimos', inf: 'salir', fr: "Nous partons demain.", p: 3, forms: SALIR },
+        { es: 'Nosotros ___ de casa a las ocho.', a: 'salimos', inf: 'salir', fr: "Nous partons de la maison à huit heures.", p: 3, forms: SALIR },
         { es: '¿A qué hora ___ (tú)?', a: 'sales', inf: 'salir', fr: "À quelle heure pars-tu ?", p: 1, forms: SALIR }
       ]
     },
@@ -252,8 +252,8 @@
       rule: "Présent pour l'habitude, ir a + infinitif pour demain, passé composé pour aujourd'hui et cette semaine.",
       cards: [
         { es: 'Todos los días (yo) ___ en casa.', a: 'como', inf: 'comer', fr: "Tous les jours je mange à la maison.", p: 0, forms: reg('comer') },
-        { es: 'Mañana (yo) ___ en un restaurante.', a: 'voy a comer', inf: 'comer', fr: "Demain je vais manger au restaurant.", p: 0, forms: IR_A.map(function (f) { return f + ' comer'; }) },
-        { es: 'Hoy (yo) ___ con un amigo.', a: 'he comido', inf: 'comer', fr: "Aujourd'hui j'ai mangé avec un ami.", p: 0, forms: perf('comido') },
+        { es: 'Mañana (yo) ___ en un restaurante.', a: ['voy a comer', 'como'], inf: 'comer', fr: "Demain je vais manger au restaurant.", p: 0, forms: IR_A.map(function (f) { return f + ' comer'; }) },
+        { es: 'Hoy (yo) ya ___ con un amigo.', a: 'he comido', inf: 'comer', fr: "Aujourd'hui j'ai déjà mangé avec un ami.", p: 0, forms: perf('comido') },
         { es: 'Esta semana Luis ___ un artículo muy bueno.', a: 'ha leído', inf: 'leer', fr: "Cette semaine Luis a lu un très bon article.", p: 2, forms: perf('leído') }
       ]
     }
